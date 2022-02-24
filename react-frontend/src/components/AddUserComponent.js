@@ -4,14 +4,14 @@ import UserService from '../services/UserService'
 
 const AddUserComponent = () => {
 
-    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate();
     // const { id } = useParams();
 
     const saveUser = (e) => {
         e.preventDefault();
-        const user = { email, password }
+        const user = { username, password }
 
         UserService.createUser(user).then((response) => {
             navigate('/addresses');
@@ -48,20 +48,20 @@ const AddUserComponent = () => {
                         <div className='card-body'>
                             <form>
                                 <div className='form-group mb-2'>
-                                    <label className='form-label'>Register Email:</label>
+                                    <label className='form-label'>Register Username:</label>
                                     <input
                                         type="text"
-                                        placeholder='Enter Email'
-                                        name='email'
+                                        placeholder='Enter Username'
+                                        name='username'
                                         className='form-control'
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
                                     />
                                 </div>
                                 <div className='form-group mb-2'>
                                     <label className='form-label'>Create Password:</label>
                                     <input
-                                        type="text"
+                                        type="password"
                                         placeholder='Enter New Password'
                                         name='password'
                                         className='form-control'

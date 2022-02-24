@@ -25,10 +25,20 @@ public class UserController {
   @Autowired
   private UserRepository userRepository;
 
-  @GetMapping
-  public List<User> getAllUsers() {
-    return userRepository.findAll();
-  }
+  // @GetMapping
+  // public List<User> getAllUsers() {
+  //   return userRepository.findAll();
+  // }
+
+  // @GetMapping("{email}")
+  // public User getUserByEmail(String email) throws ResourceNotFoundException{
+  //   User user = userRepository.findByEmail(email);
+
+  //   if (null == user) {
+  //     throw new ResourceNotFoundException("User not found with email : " + email);
+  //   }
+  //   return user;
+  // }
 
   @PostMapping
   public User createUser(@RequestBody User user) {
