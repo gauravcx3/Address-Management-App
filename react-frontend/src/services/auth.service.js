@@ -20,3 +20,11 @@ const login = (username, password) => {
     return response.data;
 });
 };
+const logout = () => {
+    localStorage.removeItem("user");
+};
+export default {
+    regiter,
+    login,
+    login,
+};
