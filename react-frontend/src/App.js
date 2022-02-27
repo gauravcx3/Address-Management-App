@@ -10,20 +10,24 @@ import AddUserComponent from './components/AddUserComponent';
 
 
 
-function App() {
-    return (
-        <Router>
-                <HeaderComponent />
-                    <Routes>
-                        <Route path="/" element={<ListAddressComponent />} />
-                        <Route path="/addresses" element={<ListAddressComponent />} />
-                        <Route path="/add-address" element={<AddAddressComponent />} />
-                        <Route path="/edit-address/:id" element={<AddAddressComponent />} />
-                        <Route path="/users" element={<AddUserComponent />} />
-                    </Routes>
-                <FooterComponent />
-        </Router>
-    );
-}
 
-export default App;
+
+
+
+// function App() {
+//     return (
+//         <Router>
+//                 <HeaderComponent />
+//                     <Routes>
+//                         <Route path="/" element={<ListAddressComponent />} />
+//                         <Route path="/addresses" element={<ListAddressComponent />} />
+//                         <Route path="/add-address" element={<AddAddressComponent />} />
+//                         <Route path="/edit-address/:id" element={<AddAddressComponent />} />
+//                         <Route path="/users" element={<AddUserComponent />} />
+//                     </Routes>
+//                 <FooterComponent />
+//         </Router>
+//     );
+// }
+
+// export default App;
