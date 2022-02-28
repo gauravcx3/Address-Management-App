@@ -28,11 +28,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-
 @Entity
-@Table(name = "user", uniqueConstraints = { 
-  @UniqueConstraint(columnNames = { "username" }), 
-  @UniqueConstraint(columnNames = { "email" }) 
+@Table(name = "user", uniqueConstraints = {
+    @UniqueConstraint(columnNames = { "username" }),
+    @UniqueConstraint(columnNames = { "email" })
 })
 public class User {
   @Id
@@ -54,10 +53,12 @@ public class User {
   private String password;
 
   @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(name = "user_roles", 
-      joinColumns = @JoinColumn(name = "user_id"), 
-      inverseJoinColumns = @JoinColumn(name = "role_id"))
+  @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
+
+  // @OneToMany(fetch = FetchType.LAZY)
+  // @JoinColumn(name = "user_address_key", referencedColumnName = "id")
+  // private List<Address> addresses = new ArrayList<>();
 
   public User() {
 
@@ -109,11 +110,7 @@ public class User {
     this.roles = roles;
   }
 
-  // @OneToMany(cascade = CascadeType.ALL)
-  // @JoinColumn(name = "user_address_key", referencedColumnName = "id")
-  // List<Address> addresses = new ArrayList<>();
 }
-
 
 // package net.javaguides.springboot.model;
 
@@ -143,19 +140,20 @@ public class User {
 // @NoArgsConstructor
 // @AllArgsConstructor
 // @Entity
-// @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+// @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames =
+// "email"))
 // public class User {
-//   @Id
-//   @GeneratedValue(strategy = GenerationType.IDENTITY)
-//   @Column(name = "id")
-//   private Long id;
+// @Id
+// @GeneratedValue(strategy = GenerationType.IDENTITY)
+// @Column(name = "id")
+// private Long id;
 
-//   @Column(name = "email")
-//   private String email;
+// @Column(name = "email")
+// private String email;
 
-//   private String password;
+// private String password;
 
-//   @OneToMany(cascade = CascadeType.ALL)
-//   @JoinColumn(name = "user_address_key", referencedColumnName = "id")
-//   List<Address> addresses = new ArrayList<>();
+// @OneToMany(cascade = CascadeType.ALL)
+// @JoinColumn(name = "user_address_key", referencedColumnName = "id")
+// List<Address> addresses = new ArrayList<>();
 // }
