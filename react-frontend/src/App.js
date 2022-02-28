@@ -48,7 +48,7 @@ const App = () => {
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
-            bezKoder
+            Address Management App
           </Link>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
@@ -116,6 +116,9 @@ const App = () => {
             <Route path="/user" element={<BoardUser />} />
             <Route path="/mod" element={<BoardModerator />} />
             <Route path="/admin" element={<BoardAdmin />} />
+            <Route path="/addresses" element={<ListAddressComponent />} />
+            <Route path="/add-address" element={<AddAddressComponent />} />
+//          <Route path="/edit-address/:id" element={<AddAddressComponent />} />
           </Routes>
         </div>
         {/* <AuthVerify logOut={logOut}/> */}
