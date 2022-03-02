@@ -9,10 +9,6 @@ class AddressService{
     }
 
     createAddress(userId, address){
-        console.log('********************');
-        console.log('TRIED TO ADD SERVICE');
-        console.log(address);
-        console.log('********************');
         return axios.post(ADDRESS_BASE_REST_API_URL + '/add/' + userId, address);
     }
 
@@ -21,10 +17,6 @@ class AddressService{
     }
 
     updateAddress(addressId, address){
-        console.log('***********************');
-        console.log('TRIED TO UPDATE SERVICE');
-        console.log(address);
-        console.log('***********************');
         return axios.put(ADDRESS_BASE_REST_API_URL + '/edit/' + addressId, address)
     }
 
