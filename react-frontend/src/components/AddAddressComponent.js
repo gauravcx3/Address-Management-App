@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, Link, useParams } from 'react-router-dom'
 import AddressService from '../services/AddressService'
+import AuthService from "../services/auth.service";
 
 const AddAddressComponent = () => {
 
+    const userId = AuthService.getCurrentUser().id;
     const [addressLine1, setAddressLine1] = useState('')
     const [addressLine2, setAddressLine2] = useState('')
     const [postalCode, setPostalCode] = useState('')
+    // const [userId, setUserId] = useState('')
     const navigate = useNavigate();
     const { id } = useParams();
 
     const saveOrUpdateAddress = (e) => {
         e.preventDefault();
-        const address = { addressLine1, addressLine2, postalCode }
+        const address = { addressLine1, addressLine2, postalCode };
 
         if (id) {
             AddressService.updateAddress(id, address).then((response) => {
@@ -22,7 +25,7 @@ const AddAddressComponent = () => {
             })
         }
         else {
-            AddressService.createAddress(address).then((response) => {
+            AddressService.createAddress(userId, address).then((response) => {
                 navigate('/addresses');
             }).catch(error => {
                 console.log(error)

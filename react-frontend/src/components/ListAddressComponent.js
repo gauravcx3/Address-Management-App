@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import AddressService from '../services/AddressService'
+import AuthService from "../services/auth.service";
 
 export const ListAddressComponent = () => {
 
     const [address, setAddresses] = useState([])
+    const currentUser = AuthService.getCurrentUser();
 
     useEffect(() => {
-        getAllAddresses();
+        getAllAddresses(currentUser.id);
     }, [])
 
     const getAllAddresses = () => {
-        AddressService.getAllAddresses().then((response) => {
+        AddressService.getAllAddresses(currentUser.id).then((response) => {
             setAddresses(response.data);
         }).catch(error => {
             console.log(error);

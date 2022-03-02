@@ -13,36 +13,49 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import net.javaguides.springboot.repository.AddressRepository;
+import net.javaguides.springboot.repository.UserRepository;
 import net.javaguides.springboot.exception.ResourceNotFoundException;
 import net.javaguides.springboot.model.Address;
 import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/v1/addresses")
+@RequestMapping("/api/test/addresses")
 public class AddressController {
 
   @Autowired
   private AddressRepository addressRepository;
 
-  @GetMapping
-  public List<Address> getAllAddresses() {
-    return addressRepository.findAll();
+  @Autowired
+  private UserRepository userRepository;
+
+  @GetMapping("/user/{id}")
+  public List<Address> getAllAddresses(@PathVariable Long id) {
+    return addressRepository.findByUserId(id);
   }
 
-  @PostMapping
-  public Address createAddress(@RequestBody Address address) {
-    return addressRepository.save(address);
-  }
-
-  @GetMapping("{id}")
+  @GetMapping("/edit/{id}")
   public ResponseEntity<Address> getAddressById(@PathVariable Long id) {
     Address address = addressRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("Address does not exist with id: " + id));
     return ResponseEntity.ok().body(address);
   }
 
-  @PutMapping("{id}")
+  // @PostMapping("/add")
+  // public Address createAddress(@RequestBody Address address) {
+  // return addressRepository.save(address);
+  // }
+
+  @PostMapping("/add/{id}")
+  public ResponseEntity<Address> createAddress(@PathVariable Long id, @RequestBody Address addressDetails) {
+    Address newAddress = userRepository.findById(id).map(user -> {
+      addressDetails.setUser(user);
+      return addressRepository.save(addressDetails);
+    }).orElseThrow(() -> new ResourceNotFoundException("Not found User with id = " + id));
+    return ResponseEntity.ok(newAddress);
+  }
+
+  @PutMapping("/edit/{id}")
   public ResponseEntity<Address> updateAddress(@PathVariable Long id, @RequestBody Address addressDetails) {
     Address updateAddress = addressRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("Address does not exist with id: " + id));
@@ -53,10 +66,10 @@ public class AddressController {
     return ResponseEntity.ok(updateAddress);
   }
 
-  @DeleteMapping("{id}")
-  public ResponseEntity<HttpStatus> deleteAddress(@PathVariable Long id){
+  @DeleteMapping("/delete/{id}")
+  public ResponseEntity<HttpStatus> deleteAddress(@PathVariable Long id) {
     Address address = addressRepository.findById(id)
-    .orElseThrow(() -> new ResourceNotFoundException("Address does not exist with id: " + id));
+        .orElseThrow(() -> new ResourceNotFoundException("Address does not exist with id: " + id));
     addressRepository.delete(address);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }

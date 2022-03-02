@@ -1,26 +1,35 @@
 import axios from 'axios';
 
-const ADDRESS_BASE_REST_API_URL = "http://localhost:8080/api/v1/addresses";
+
+const ADDRESS_BASE_REST_API_URL = "http://localhost:8080/api/test/addresses";
 
 class AddressService{
-    getAllAddresses(){
-        return axios.get(ADDRESS_BASE_REST_API_URL);
+    getAllAddresses(userId){
+        return axios.get(ADDRESS_BASE_REST_API_URL + '/user/' + userId);
     }
 
-    createAddress(address){
-        return axios.post(ADDRESS_BASE_REST_API_URL, address);
+    createAddress(userId, address){
+        console.log('********************');
+        console.log('TRIED TO ADD SERVICE');
+        console.log(address);
+        console.log('********************');
+        return axios.post(ADDRESS_BASE_REST_API_URL + '/add/' + userId, address);
     }
 
     getAddressById(addressId){
-        return axios.get(ADDRESS_BASE_REST_API_URL + '/' + addressId);
+        return axios.get(ADDRESS_BASE_REST_API_URL + '/edit/' + addressId);
     }
 
     updateAddress(addressId, address){
-        return axios.put(ADDRESS_BASE_REST_API_URL + '/' + addressId, address)
+        console.log('***********************');
+        console.log('TRIED TO UPDATE SERVICE');
+        console.log(address);
+        console.log('***********************');
+        return axios.put(ADDRESS_BASE_REST_API_URL + '/edit/' + addressId, address)
     }
 
     deleteAddress(addressId){
-        return axios.delete(ADDRESS_BASE_REST_API_URL + '/' + addressId)
+        return axios.delete(ADDRESS_BASE_REST_API_URL + '/delete/' + addressId)
     }
 }
 
