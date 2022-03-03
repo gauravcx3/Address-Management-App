@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AddressService from '../services/AddressService'
 import AuthService from "../services/auth.service";
 
@@ -7,6 +7,7 @@ export const ListAddressComponent = () => {
 
     const [address, setAddresses] = useState([])
     const currentUser = AuthService.getCurrentUser();
+    const navigate = useNavigate();
 
     useEffect(() => {
         getAllAddresses(currentUser.id);
@@ -28,12 +29,28 @@ export const ListAddressComponent = () => {
         })
     }
 
+    const logOut = () => {
+        AuthService.logout();
+        navigate('/home');
+      };
+
     return (
         <div className='container'>
             <br />
             <h2 className='text-center'>Saved Addresses</h2>
-            <Link to="/add-address" className='btn btn-primary mb-2 big-button'>Add Address</Link>
-            <table className='table table-bordered table-striped'>
+            <table className='big-button table table-bordered'>
+            <tbody>
+                <tr>
+                    <td>
+                        <Link to="/add-address" className='btn btn-primary big-button'>Add Address</Link>
+                    </td>
+                    <td>
+                    <button className='btn btn-danger big-button' onClick={logOut}>Logout</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table className='table table-bordered table-striped table-dark table-hover'>
                 <thead className='text-center'>
                     <tr>
                         <th>Id</th>

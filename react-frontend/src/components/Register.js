@@ -4,6 +4,9 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import AuthService from "../services/auth.service";
+import { useNavigate, Link, useParams } from 'react-router-dom'
+
+
 const required = (value) => {
   if (!value) {
     return (
@@ -85,20 +88,21 @@ const Register = (props) => {
     }
   };
   return (
-    <div className="col-md-12">
-      <div className="card card-container">
-        <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        />
+    <div>
+            <br />
+            <div className='container'>
+                <div className='row'>
+                    <div className='card col-md-6 offset-md-3 offset-md-3'>
+                        <h2 className='text-center'>Register</h2>
+                        <div className='card-body'>
         <Form onSubmit={handleRegister} ref={form}>
           {!successful && (
             <div>
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
+              <div className="form-group mb-2">
+                <label htmlFor="username" className='form-label'>Create Username:</label>
                 <Input
                   type="text"
+                  placeholder='Enter Username'
                   className="form-control"
                   name="username"
                   value={username}
@@ -106,10 +110,11 @@ const Register = (props) => {
                   validations={[required, vusername]}
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
+              <div className="form-group mb-2">
+                <label htmlFor="email" className='form-label'>Register Email:</label>
                 <Input
                   type="text"
+                  placeholder='Enter Email'
                   className="form-control"
                   name="email"
                   value={email}
@@ -117,10 +122,11 @@ const Register = (props) => {
                   validations={[required, validEmail]}
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
+              <div className="form-group mb-2">
+                <label htmlFor="password" className='form-label'>Create Password:</label>
                 <Input
                   type="password"
+                  placeholder='Enter Password'
                   className="form-control"
                   name="password"
                   value={password}
@@ -128,8 +134,10 @@ const Register = (props) => {
                   validations={[required, vpassword]}
                 />
               </div>
+              <br />
               <div className="form-group">
-                <button className="btn btn-primary btn-block">Sign Up</button>
+                <button className="btn btn-success big-button">Save</button>
+                <Link to="/home" className='btn btn-danger big-button'>Cancel</Link>
               </div>
             </div>
           )}
@@ -139,16 +147,20 @@ const Register = (props) => {
                 className={
                   successful ? "alert alert-success" : "alert alert-danger"
                 }
-                role="alert"
-              >
+                role="alert">
                 {message}
               </div>
+              <Link to="/login" className='btn btn-success big-button'> Proceed to Login </Link>
+              <Link to="/home" className='btn btn-info big-button'> Return to Homepage </Link>
             </div>
           )}
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
-      </div>
-    </div>
+        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
   );
 };
 export default Register;
