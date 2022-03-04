@@ -135,14 +135,14 @@ const Register = (props) => {
                 />
               </div>
               <br />
-              <div className="form-group">
+              <div className="form-group mb-2">
                 <button className="btn btn-success big-button">Save</button>
                 <Link to="/home" className='btn btn-danger big-button'>Cancel</Link>
               </div>
             </div>
           )}
           {message && (
-            <div className="form-group">
+            <div className="form-group mb-2">
               <div
                 className={
                   successful ? "alert alert-success" : "alert alert-danger"
