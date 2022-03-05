@@ -30,8 +30,8 @@ public class AddressController {
   @Autowired
   private UserRepository userRepository;
 
-  @GetMapping("/user/{id}")
   // @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+  @GetMapping("/user/{id}")
   public List<Address> getAllAddresses(@PathVariable Long id) {
     return addressRepository.findByUserId(id);
   }
